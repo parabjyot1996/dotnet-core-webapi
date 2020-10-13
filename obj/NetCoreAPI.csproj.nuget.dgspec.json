@@ -40,6 +40,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.ApplicationInsights.AspNetCore": {
+              "target": "Package",
+              "version": "[2.14.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.4, )"
@@ -61,6 +65,42 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[7.9.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[3.4.0, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Serilog.Sinks.ApplicationInsights": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Serilog.Sinks.Async": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Serilog.Sinks.ElasticSearch": {
+              "target": "Package",
+              "version": "[8.4.1, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Serilog.Sinks.Seq": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

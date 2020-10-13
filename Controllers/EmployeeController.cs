@@ -9,15 +9,16 @@ using Microsoft.AspNetCore.Mvc;
 using NetCoreAPI.Dtos;
 using NetCoreAPI.Models;
 using NetCoreAPI.Repositories;
+using Serilog;
 
-namespace NetCoreAPI.Controllers
-{
-    [ApiController]
-    [Route("api/[controller]")]
-    [Produces("application/json")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class EmployeeController: ControllerBase
+    namespace NetCoreAPI.Controllers
     {
+        [ApiController]
+        [Route("api/[controller]")]
+        [Produces("application/json")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public class EmployeeController: ControllerBase
+        {
         private readonly IEmployeeRepository _repo;
         private readonly IMapper _mapper;
 
@@ -36,6 +37,8 @@ namespace NetCoreAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
+            Log.Error("Error employee controller");
+            Log.Information("Information employee controller");
             var employees = _repo.GetAllEmployees();
             //AutoMapper used to convert Domain model to Dto model
             var employeesDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);

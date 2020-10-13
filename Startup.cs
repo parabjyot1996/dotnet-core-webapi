@@ -20,7 +20,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NetCoreAPI.ApplicationContext;
+using NetCoreAPI.ElasticsearchConfiguration;
 using NetCoreAPI.Repositories;
+using Serilog;
 
 namespace NetCoreAPI
 {
@@ -36,6 +38,8 @@ namespace NetCoreAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry();
+
             //Register Identity Model
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
@@ -130,6 +134,9 @@ namespace NetCoreAPI
             //Register AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
+            //Register Elasticsearch
+            services.AddElasticsearch(_config);
+
             services.AddControllers();
         }
 
@@ -152,6 +159,8 @@ namespace NetCoreAPI
             });
 
             //app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             app.UseAuthentication();
 
