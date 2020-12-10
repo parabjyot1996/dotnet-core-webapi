@@ -1,0 +1,76 @@
+Elasticsearch Tutorial
+
+Terms:
+1. Node: single running instance of Elasticsearch
+2. Cluster: collection of one or more nodes
+3. Index: collection of different type of documents and their properties
+4. Document: collection of fields in JSON format
+5. Shards: indexes are horizontally subdivided into shards
+
+Elasticsearch	RDBMS
+Cluster		Database
+Shard		Shard
+Index		Table
+Field		Column
+Document	Row
+
+Elasticsearch API:
+1. Document API
+2. Search API
+3. Indices API
+4. cat API
+5. Cluster API
+
+1. Document API
+a. Single Document APIs
+	-Index API (to insert or update record)
+	-Get API (searching)
+	-Delete API (to delete record)
+	-Update API (to update record)
+
+b. Multi Document APIs
+	-Multi get API (get from multiple index or type)
+	-Bulk API (to perform bulk operations)
+	-Delete by query API
+	-Update by query API
+	-Reindex API
+
+2. Search API
+a. Search using Request Body or Query String
+POST school/_search
+{
+  "query": {
+    "match": {
+      "name": "Modern"
+    }
+  }
+}
+
+b. Pagination
+POST school/_search
+{
+  "size": 2,
+  "from": 0, 
+  "query": {
+    "match": {
+      "name": "School"
+    }
+  }
+}
+
+c. Sort
+POST school/_search
+{
+  "query": {
+    "match": {
+      "name": "School"
+    }
+  },
+  "sort": [
+    {
+      "fees": {
+        "order": "desc"
+      }
+    }
+  ]
+}
