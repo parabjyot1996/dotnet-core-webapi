@@ -1,0 +1,22 @@
+Identity Model in .Net Core
+
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+1. Inherit AppDbContext from IdentityDbContext
+2. In StartUp.cs, in ConfigureServices method add the following: 
+	services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<AppDbContext>();	
+3. Add UseAuthentication() middleware in Configure method
+4. Create RegisterViewModel, Controller and View for registration
+5. Use UserManger to create, update, delete users and SignInManager to signin and signout user
+6. Apply authorize attribute globally(StartUp.cs in ConfigureServices()):
+	services.AddControllersWithViews(options => {
+                var policy = new AuthorizationPolicyBuilder()
+                                    .RequireAuthenticatedUser()
+                                    .Build();
+
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+7. Types of authorization: Role based, Claims based, Policy based
+8. RoleManager<IdentityRole> for Role Management in Asp.Net Core
+

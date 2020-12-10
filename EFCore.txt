@@ -1,0 +1,43 @@
+Command Nuget Package:
+
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+Entity Framework Core:
+1. Create AppDBContext class inherit from DbContext class.
+2. Create parameterized constructor and provide DbContextOptions in parameter to base.
+3. Create DbSet property.
+4. Configure DB provider in StartUp.cs, in ConfigureServices method
+	services.AddDbContextPool<AppDbContext>(
+		options => options.UseSqlServer(_config.GetConnectionString(<CSName>));
+	);
+5. Specify connection string in appsettings.json.
+	"ConnectionStrings": {
+    		"DevConnection": "Server=PARABJYOTS-MSL2\\SQLEXPRESS;Database=DemoDB;Trusted_Connection=true;"
+  	}
+6. For One to Many Relationship: 
+	In AppDbContext,inside OnModelCreating method
+
+	builder.Entity<Publisher>()
+                    .HasMany(b => b.Books)
+                    .WithOne(p => p.Publishers)
+                    .IsRequired();
+
+Command EF Core:
+
+dotnet tool install --global dotnet-ef
+
+dotnet ef migrations add <migrationname>
+dotnet ef database update
+dotnet ef migrations remove
+dotnet ef database update 0 --Remove all updates to database
+dotnet ef database update <specific-migration>
+dotnet ef migrations script
+
+Package Manager Console:
+
+add-migration <migrationname>
+update-database
+remove-migration
+update-database <migrationname>
+script-migration
